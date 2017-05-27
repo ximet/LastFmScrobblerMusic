@@ -12,7 +12,7 @@ class Scrobbler(object):
 
     def parse_json(filename):
         with open(filename) as data_file:
-            config = json.load(data_file)
+            self.config = json.load(data_file)
 
     def setup_lastfm(arg):
         API_KEY = self.config["API_KEY"]
