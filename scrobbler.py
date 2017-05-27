@@ -9,6 +9,8 @@ class Scrobbler(object):
     def __init__(self, filename):
         super(, self).__init__()
         self.filename = filename
+        self.parse_json(filename)
+        self.setup_lastfm()
 
     def parse_json(filename):
         with open(filename) as data_file:
