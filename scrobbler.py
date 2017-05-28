@@ -7,7 +7,6 @@ class Scrobbler(object):
     config = None
 
     def __init__(self, filename):
-        super(, self).__init__()
         self.filename = filename
         self.parse_json(filename)
         self.setup_lastfm()
@@ -27,8 +26,4 @@ class Scrobbler(object):
 
 
 
-def main():
-    Scrobbler('config.json')
-
-if __name__ == '__main__':
-    main()
+scrobbler = Scrobbler('config.json')
