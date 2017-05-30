@@ -8,14 +8,14 @@ class Scrobbler(object):
 
     def __init__(self, filename):
         self.filename = filename
-        self.parse_json(filename)
+        self.parse_json(self.filename)
         self.setup_lastfm()
 
-    def parse_json(filename):
+    def parse_json(self, filename):
         with open(filename) as data_file:
             self.config = json.load(data_file)
 
-    def setup_lastfm(arg):
+    def setup_lastfm(self):
         API_KEY = self.config["API_KEY"]
         API_SECRET = self.config["API_SECRET"]
         username = self.config["username"]
