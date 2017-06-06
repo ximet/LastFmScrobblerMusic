@@ -1,6 +1,7 @@
 import pylast
 import json
-import ScriptingBridge
+# for using install PyObjC: bridge between the Python and Objective-C
+import ScriptingBridge 
 
 class Scrobbler(object):
     a_music = None
