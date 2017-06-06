@@ -1,5 +1,6 @@
 import pylast
 import json
+import ScriptingBridge
 
 class Scrobbler(object):
     a_music = None
@@ -10,6 +11,7 @@ class Scrobbler(object):
         self.filename = filename
         self.parse_json(self.filename)
         self.connection_to_lastfm()
+        self.connection_to_apple_music()
 
     def parse_json(self, filename):
         with open(filename) as data_file:
@@ -23,6 +25,10 @@ class Scrobbler(object):
         self.lastfm = pylast.LastFMNetwork(api_key=API_KEY, api_secret=API_SECRET,
                                username=username, password_hash=password)
         print("Connection to LastFM: correct")
+
+    def connection_to_apple_music(self):
+        self.a_music = ScriptingBridge.SBApplication.applicationWithBundleIdentifier_("com.apple.iTunes")
+        print("Connection to Apple Music: correct")
 
 
 
