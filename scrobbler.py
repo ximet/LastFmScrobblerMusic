@@ -9,19 +9,20 @@ class Scrobbler(object):
     def __init__(self, filename):
         self.filename = filename
         self.parse_json(self.filename)
-        self.setup_lastfm()
+        self.connection_to_lastfm()
 
     def parse_json(self, filename):
         with open(filename) as data_file:
             self.config = json.load(data_file)
 
-    def setup_lastfm(self):
+    def connection_to_lastfm(self):
         API_KEY = self.config["API_KEY"]
         API_SECRET = self.config["API_SECRET"]
         username = self.config["username"]
         password = pylast.md5(self.config["password"])
         self.lastfm = pylast.LastFMNetwork(api_key=API_KEY, api_secret=API_SECRET,
                                username=username, password_hash=password)
+        print("Connection to LastFM: correct")
 
 
 
