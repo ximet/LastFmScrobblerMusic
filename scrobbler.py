@@ -13,7 +13,6 @@ class Scrobbler(object):
         self.parse_json(self.filename)
         self.connection_to_lastfm()
         self.connection_to_apple_music()
-        self.connection_to_yandex_music()
 
     def parse_json(self, filename):
         with open(filename) as data_file:
@@ -32,8 +31,6 @@ class Scrobbler(object):
         self.a_music = ScriptingBridge.SBApplication.applicationWithBundleIdentifier_("com.apple.iTunes")
         print("Connection to Apple Music: correct")
 
-    def connection_to_yandex_music(self):
-        print("Mock: Need check how connect to this service")
 
 
 scrobbler = Scrobbler('config.json')
