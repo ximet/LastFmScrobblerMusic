@@ -1,6 +1,7 @@
 import parser
 import lastfm
 import amusic
+import time
 
 class Scrobbler(object):
     a_music = None
@@ -10,13 +11,24 @@ class Scrobbler(object):
     def __init__(self, filename):
         self.filename = filename
         self.confugure_connect_to_service()
-        amusic.which_music_playing_now(self.a_music);
+        self.scrobbler()
 
     def confugure_connect_to_service(self):
         self.config = parser.parse_json(self.filename)
         self.lastfm = lastfm.connection_to_lastfm(self.config)
         self.a_music = amusic.connection_to_apple_music()
 
-
+    def scrobbler(self):
+        current_music = amusic.which_music_playing_now(self.a_music);
+        current_music['timestamp'] = int(time.time() - self.a_music.playerPosition())
+        for attempt in range(3):
+            try:
+                self.lastfm.scrobble(**current_music)
+                print('scrobbling correct') #for logging
+                break
+            except pylast.WSError:
+                time.sleep(15)
+        else:
+            print('have problem with scrobbling this song') #for logging
 
 scrobbler = Scrobbler('config.json')
