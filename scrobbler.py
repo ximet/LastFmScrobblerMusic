@@ -21,14 +21,6 @@ class Scrobbler(object):
     def scrobbler(self):
         current_music = amusic.which_music_playing_now(self.a_music);
         current_music['timestamp'] = int(time.time() - self.a_music.playerPosition())
-        for attempt in range(3):
-            try:
-                self.lastfm.scrobble(**current_music)
-                print('scrobbling correct') #for logging
-                break
-            except pylast.WSError:
-                time.sleep(15)
-        else:
-            print('have problem with scrobbling this song') #for logging
+        lastfm.scrobbling_music(self.lastfm, current_music)
 
 scrobbler = Scrobbler('config.json')

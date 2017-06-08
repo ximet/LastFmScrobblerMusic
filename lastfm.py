@@ -9,3 +9,14 @@ def connection_to_lastfm(config):
                            username=username, password_hash=password)
     print("Connection to LastFM: correct")
     return lastfm
+
+def scrobbling_music(instance, music):
+    for attempt in range(3):
+        try:
+            instance.scrobble(**music)
+            print('scrobbling correct') #for logging
+            break
+        except pylast.WSError:
+            time.sleep(15)
+    else:
+        print('have problem with scrobbling this song') #for logging
