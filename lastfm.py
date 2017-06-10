@@ -1,5 +1,7 @@
 import pylast
 
+SCROBBLE_ATTEMPTS = 3
+
 def connection_to_lastfm(config):
     API_KEY = config["API_KEY"]
     API_SECRET = config["API_SECRET"]
@@ -11,7 +13,7 @@ def connection_to_lastfm(config):
     return lastfm
 
 def scrobbling_music(instance, music):
-    for attempt in range(3):
+    for attempt in range(SCROBBLE_ATTEMPTS):
         try:
             instance.scrobble(**music)
             print('scrobbling correct') #for logging
