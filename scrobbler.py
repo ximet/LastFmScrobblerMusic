@@ -23,4 +23,5 @@ class Scrobbler(object):
         current_music['timestamp'] = int(time.time() - self.a_music.playerPosition())
         lastfm.scrobbling_music(self.lastfm, current_music)
 
+
 scrobbler = Scrobbler('config.json')
